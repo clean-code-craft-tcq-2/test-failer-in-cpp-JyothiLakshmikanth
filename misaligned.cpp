@@ -12,15 +12,14 @@ void printConsole(int majorIdx, int minorIdx)
     ::std::string output = majorColor[majorIdx];
     char ch = '|';
     output+=ch;
-    std::cout << calcPair(majorIdx, minorIdx) <<ch
-    << output.append(minorColor[majorIdx] ) << "\n";
+    std::cout << calcPair(majorIdx, minorIdx) <<ch<< output.append(minorColor[majorIdx] ) << "\n";
 }
 
 int printColorMap() {
     int i = 0, j = 0;
     for(i = 0; i < 5; i++) {
         for(j = 0; j < 5; j++) {
-            printConsole(i,j;
+            printConsole(i,j);
         }
     }
     return i * j;
