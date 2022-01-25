@@ -9,11 +9,11 @@ int calcPair(int majorIdx, int minorIdx)
 }
 void printConsole(int majorIdx, int minorIdx)
 {
-    ::std::string output = majorColor[majorIdx];
-    char ch = '|';
-    output+=ch;
+//     ::std::string output = majorColor[majorIdx];
+     char ch = '|';
+//     output+=ch;
 //     std::cout << calcPair(majorIdx, minorIdx) <<ch<< output.append(minorColor[majorIdx] ) << "\n";
-   std::cout << calcPair(majorIdx, minorIdx) <<majorColor[majorIdx]<<minorColor[majorIdx]  << "\n";
+   std::cout << calcPair(majorIdx, minorIdx) << ch << majorColor[majorIdx] << ch << minorColor[majorIdx]  << "\n";
 }
 
 int printColorMap() {
