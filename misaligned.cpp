@@ -22,13 +22,17 @@ return output;
    
 //   std::cout << calcPair(majorIdx, minorIdx) << ch << majorColor[majorIdx] << ch << minorColor[majorIdx]  << "\n";
 }
+void printOnConsole(::std::string output)
+{
+    std::cout << output << "\n";
+}
 
 int printColorMap() {
     int i = 0, j = 0;
     for(i = 0; i < 5; i++) {
         for(j = 0; j < 5; j++) {
-            ::std::string output = getCombination(i,j);
-             std::cout << output << "\n";
+           ::std::string output = getCombination(i,j);
+           printOnConsole(output);
         }
     }
     return i * j;
