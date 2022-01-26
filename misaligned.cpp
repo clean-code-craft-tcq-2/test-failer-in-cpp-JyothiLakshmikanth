@@ -1,11 +1,11 @@
 #include <iostream>
 #include <sstream>
 #include <assert.h>
+#include <string>
+
 const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
 const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
- std::ostringstream oss;
- std::streambuf* p_cout_streambuf = std::cout.rdbuf();
- std::cout.rdbuf(oss.rdbuf());
+
 int calcPair(int majorIdx, int minorIdx)
 {
    return majorIdx * 5 + minorIdx;
