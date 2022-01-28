@@ -11,10 +11,16 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: tshirts fail
-      run: g++ -Wall -Wextra -Werror tshirts.cpp -o tshirts.out
+      run: |
+         g++ -Wall -Wextra -Werror tshirts.cpp -o tshirts.out
+         ./tshirts.out
 
     - name: misaligned fail
-      run: g++ -Wall -Wextra -Werror misaligned.cpp -o misaligned.out
+      run: |
+         g++ -Wall -Wextra -Werror misaligned.cpp -o misaligned.out
+         ./misaligned.out
 
     - name: alerter fail
-      run: g++ -Wall -Wextra -Werror alerter.cpp -o alerter.out
+      run: |
+        g++ -Wall -Wextra -Werror alerter.cpp -o alerter.out
+        ./alerter.out
