@@ -8,7 +8,6 @@ float acceptedDiff = 0.001;
 
 int checkForThreshold(float celcius)
 {
-    std::cout << "ALERT: Temperature is " << celcius << " celcius.\n";
     if(celcius>MAX_Temp)
     {
         return 500;
@@ -33,6 +32,7 @@ void alertInCelcius(float farenheit, int(*funAlerter)(float)) {
 }
 int networkAlertStub(float celcius) {
     int value = checkForThreshold(celcius);
+    ::std::cout<<"value "<<value<<::std::endl;
     return value;
 }
 void testConversion(float f, float expectedValue)
@@ -55,8 +55,8 @@ void testAlerter(float testValue, int expectedCount)
     assert(alertFailureCount == expectedCount);
 }
 int main() {
-    testAlerter(303.6, 0);
     testAlerter(400.5, 1);
+    testAlerter(303.6, 1);
     testAlerter(503.6, 2);
     testConversion(400.5, 204.722);
     testConversion(303.6, 150.899);
