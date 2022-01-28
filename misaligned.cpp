@@ -17,7 +17,7 @@ int calcPair(int majorIdx, int minorIdx)
     output+=ch;
     output.append(majorColor[majorIdx]);
     output+=ch;
-    output.append(minorColor[majorIdx] );
+    output.append(minorColor[minorIdx] );
 return output;
    
 //   std::cout << calcPair(majorIdx, minorIdx) << ch << majorColor[majorIdx] << ch << minorColor[majorIdx]  << "\n";
