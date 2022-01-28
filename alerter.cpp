@@ -1,9 +1,10 @@
 #include <iostream>
 #include <assert.h>
-
+#include <cmath>
+ 
 float MAX_Temp = 200;
 int alertFailureCount = 0;
-int count = 0;
+float acceptedDiff = 0.001;
 
 int checkForThreshold(float celcius)
 {
@@ -20,36 +21,48 @@ float convertToCelcius(float farenheit)
 }
 void countFailureCases(int returnCode)
 {
-        if (returnCode != 200) {
-        // non-ok response is not an error! Issues happen in life!
-        // let us keep a count of failures to report
-        // However, this code doesn't count failures!
-        // Add a test below to catch this bug. Alter the stub above, if needed.
-        alertFailureCount += 0;
-    }
+   if (returnCode != 200) 
+   {
+        alertFailureCount += 1;
+   }
 }
-void alertInCelcius(float farenheit, void(*networkAlertStub)(float)) {
+void alertInCelcius(float farenheit, int(*funAlerter)(float)) {
     float celcius = convertToCelcius(farenheit);
-    int returnCode = checkForThreshold(celcius);
-    networkAlertStub(celcius);
+    int returnCode = funAlerter(celcius);
     countFailureCases(returnCode);
 }
-void networkAlertStub(float celcius) {
-    // Return 200 for ok
-    // Return 500 for not-ok
-    // stub always succeeds and returns 200
-    if (checkForThreshold(celcius) == 500)
-    {
-        count++;
-    }
+int networkAlertStub(float celcius) {
+    int value = checkForThreshold(celcius);
+    return value;
 }
-int main() {
-    void (*funcptr)(float) = networkAlertStub;
-    alertInCelcius(400.5, funcptr);
-    alertInCelcius(303.6, funcptr);
-    assert(count == alertFailureCount);
-    std::cout << alertFailureCount << " alerts failed.\n";
-    std::cout << "All is well (maybe!)\n";
-    return 0;
+void testConversion(float f, float expectedValue)
+{
+    float receivedValue = convertToCelcius(f);
+    std::cout <<receivedValue<<::std::endl;
+    std::cout <<expectedValue<<::std::endl;
+    std::cout <<(receivedValue-expectedValue)<<::std::endl;
+    assert((receivedValue-expectedValue) < acceptedDiff);
+}
+void testTheThreshold(float c, int expectedoutput)
+{
+    assert(checkForThreshold(c) == expectedoutput);
 }
 
+void testAlerter(float testValue, int expectedCount)
+{
+    alertInCelcius(testValue, &networkAlertStub);
+    std::cout << "alertFailureCount "<< alertFailureCount << " alerts failed.\n";
+    assert(alertFailureCount == expectedCount);
+}
+int main() {
+    testAlerter(400.5, 1);
+    testAlerter(303.6, 1);
+    testAlerter(503.6, 2);
+    testConversion(400.5, 204.722);
+    testConversion(303.6, 150.899);
+    testTheThreshold(204.722, 500);
+    testTheThreshold(150.899, 200);
+    std::cout << "All is well (maybe!)\n";
+
+    return 0;
+}
