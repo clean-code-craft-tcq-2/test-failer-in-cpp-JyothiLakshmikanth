@@ -70,13 +70,13 @@ void countFailureCases(int returnCode)
         alertFailureCount += 0;
     }
 }
-void alertInCelcius(float farenheit, int(*networkAlertStub)(float)) {
+void alertInCelcius(float farenheit, void(*networkAlertStub)(float)) {
     float celcius = convertToCelcius(farenheit);
     int returnCode = checkForThreshold(celcius);
-    int returnCodeStub = networkAlertStub(celcius);
+    networkAlertStub(celcius);
     countFailureCases(returnCode);
 }
-int networkAlertStub(float celcius) {
+void networkAlertStub(float celcius) {
     // Return 200 for ok
     // Return 500 for not-ok
     // stub always succeeds and returns 200
@@ -84,10 +84,9 @@ int networkAlertStub(float celcius) {
     {
         count++;
     }
-    return count;
 }
 int main() {
-    int (*funcptr)(float) = networkAlertStub;
+    void (*funcptr)(float) = networkAlertStub;
     alertInCelcius(400.5, funcptr);
     alertInCelcius(303.6, funcptr);
     assert(count == alertFailureCount);
