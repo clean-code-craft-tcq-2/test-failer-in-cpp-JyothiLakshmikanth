@@ -23,7 +23,7 @@ void countFailureCases(int returnCode)
 {
    if (returnCode != 200) 
    {
-        alertFailureCount += 0;
+        alertFailureCount += 1;
    }
 }
 void alertInCelcius(float farenheit, int(*funAlerter)(float)) {
@@ -55,8 +55,8 @@ void testAlerter(float testValue, int expectedCount)
     assert(alertFailureCount == expectedCount);
 }
 int main() {
+    testAlerter(303.6, 0);
     testAlerter(400.5, 1);
-    testAlerter(303.6, 1);
     testAlerter(503.6, 2);
     testConversion(400.5, 204.722);
     testConversion(303.6, 150.899);
