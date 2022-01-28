@@ -87,7 +87,7 @@ int networkAlertStub(float celcius) {
     return count;
 }
 int main() {
-    int (*funcptr)(int) = networkAlertStub;
+    int (*funcptr)(float) = networkAlertStub;
     alertInCelcius(400.5, funcptr);
     alertInCelcius(303.6, funcptr);
     assert(count == alertFailureCount);
