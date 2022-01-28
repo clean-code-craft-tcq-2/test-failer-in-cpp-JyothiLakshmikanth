@@ -70,7 +70,7 @@ void countFailureCases(int returnCode)
         alertFailureCount += 0;
     }
 }
-void alertInCelcius(float farenheit, int(*networkAlertStub)(int)) {
+void alertInCelcius(float farenheit, int(*networkAlertStub)(float)) {
     float celcius = convertToCelcius(farenheit);
     int returnCode = checkForThreshold(celcius);
     int returnCode = networkAlertStub(celcius);
