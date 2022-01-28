@@ -43,7 +43,7 @@ int main() {
     assert(result == 25);
     // test 
      std::cout << getCombination(0,2)<<std::endl;
-     assert(getCombination(0,2) == "2|White|Blue");
+     assert(getCombination(0,2) == "2|White|Green");
     std::cout << "All is well (maybe!)\n";
     return 0;
 }
