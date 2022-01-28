@@ -73,7 +73,7 @@ void countFailureCases(int returnCode)
 void alertInCelcius(float farenheit, int(*networkAlertStub)(float)) {
     float celcius = convertToCelcius(farenheit);
     int returnCode = checkForThreshold(celcius);
-    int returnCode = networkAlertStub(celcius);
+    int returnCodeStub = networkAlertStub(celcius);
     countFailureCases(returnCode);
 }
 int networkAlertStub(float celcius) {
