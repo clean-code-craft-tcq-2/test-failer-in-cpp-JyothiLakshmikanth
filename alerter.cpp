@@ -73,26 +73,23 @@ void countFailureCases(int returnCode)
 void alertInCelcius(float farenheit, int(*networkAlertStub)(int)) {
     float celcius = convertToCelcius(farenheit);
     int returnCode = checkForThreshold(celcius);
+    int returnCode = networkAlertStub(celcius);
     countFailureCases(returnCode);
 }
-int networkAlertStub(int returnCode) {
+int networkAlertStub(float celcius) {
     // Return 200 for ok
     // Return 500 for not-ok
     // stub always succeeds and returns 200
-    if (returnCode == 500)
+    if (checkForThreshold(celcius) == 500)
     {
         count++;
     }
     return count;
 }
 int main() {
-    int (*funcptr)(int);
-    funcptr = networkAlertStub;
-    int returnValue = 500;
-    int *ptr;
-    ptr = &returnValue;
-    alertInCelcius(400.5, funcptr(ptr));
-    alertInCelcius(303.6, funcptr(ptr));
+    int (*funcptr)(int) = networkAlertStub;
+    alertInCelcius(400.5, funcptr);
+    alertInCelcius(303.6, funcptr);
     assert(count == alertFailureCount);
     std::cout << alertFailureCount << " alerts failed.\n";
     std::cout << "All is well (maybe!)\n";
