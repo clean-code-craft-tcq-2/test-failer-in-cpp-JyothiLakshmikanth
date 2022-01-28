@@ -23,7 +23,7 @@ void countFailureCases(int returnCode)
 {
    if (returnCode != 200) 
    {
-        alertFailureCount += 1;
+        alertFailureCount += 0;
    }
 }
 void alertInCelcius(float farenheit, int(*funAlerter)(float)) {
