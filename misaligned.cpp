@@ -8,9 +8,7 @@
 const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
 const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
 
-typedef ::std::pair< const char*, const char*> T_ColorCombinationPair;
-typedef ::std::map< int , T_ColorCombinationPair> T_ColorPairMap;
-T_ColorCombinationPair colorCombinationPair;
+typedef ::std::map< int ,  ::std::pair< const char*, const char*> > T_ColorPairMap;
 T_ColorPairMap colorPairMap;
 
 int calcPair(int majorIdx, int minorIdx)
