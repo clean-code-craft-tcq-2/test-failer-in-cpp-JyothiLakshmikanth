@@ -13,9 +13,9 @@ char size(int cms) {
     return sizeName;
 }
 
-void testForCorrectSizeName(int size, char expectedSizeName)
+void testForCorrectSizeName(int size_cms, char expectedSizeName)
 {
-    assert(size(size) == expectedSizeName);
+    assert(size(size_cms) == expectedSizeName);
 }
 int main() {
 
