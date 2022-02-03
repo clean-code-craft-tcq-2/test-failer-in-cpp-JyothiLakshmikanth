@@ -13,13 +13,18 @@ char size(int cms) {
     return sizeName;
 }
 
+void testForCorrectSizeName(int size, char expectedSizeName)
+{
+    assert(size(size) == expectedSizeName);
+}
 int main() {
-    assert(size(37) == 'S');
-    assert(size(40) == 'M');
-    assert(size(43) == 'L');
-    assert(size(38) == 'S');
-    assert(size(42) == 'M');
-    
+
+    testForCorrectSize(37, 'S');
+    testForCorrectSize(40, 'M');
+    testForCorrectSize(43, 'L');
+    testForCorrectSize(38, 'S');
+    testForCorrectSize(42, 'M');
+    testForCorrectSize(-1, '\0');
     std::cout << "All is well (maybe!)\n";
     return 0;
 }
