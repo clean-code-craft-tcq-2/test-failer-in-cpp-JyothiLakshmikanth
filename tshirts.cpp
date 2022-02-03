@@ -1,9 +1,9 @@
 #include <iostream>
 #include <assert.h>
 
-char size(int cms) {
+char getTheSizeName(int cms) {
     char sizeName = '\0';
-    if(cms <= 38) {
+    if(cms <= 38 && cms>0) {
         sizeName = 'S';
     } else if(cms > 38 && cms <= 42) {
         sizeName = 'M';
@@ -13,9 +13,9 @@ char size(int cms) {
     return sizeName;
 }
 
-void testForCorrectSizeName(int size_cms, char expectedSizeName)
+void testForCorrectSizeName(int s_cms, char expectedSizeName)
 {
-    assert(size(size_cms) == expectedSizeName);
+    assert(getTheSizeName(s_cms) == expectedSizeName);
 }
 int main() {
 
