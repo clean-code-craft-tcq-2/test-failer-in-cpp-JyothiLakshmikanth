@@ -19,12 +19,12 @@ void testForCorrectSizeName(int size, char expectedSizeName)
 }
 int main() {
 
-    testForCorrectSize(37, 'S');
-    testForCorrectSize(40, 'M');
-    testForCorrectSize(43, 'L');
-    testForCorrectSize(38, 'S');
-    testForCorrectSize(42, 'M');
-    testForCorrectSize(-1, '\0');
+    testForCorrectSizeName(37, 'S');
+    testForCorrectSizeName(40, 'M');
+    testForCorrectSizeName(43, 'L');
+    testForCorrectSizeName(38, 'S');
+    testForCorrectSizeName(42, 'M');
+    testForCorrectSizeName(-1, '\0');
     std::cout << "All is well (maybe!)\n";
     return 0;
 }
