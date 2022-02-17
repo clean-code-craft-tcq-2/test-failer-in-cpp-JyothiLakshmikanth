@@ -1,32 +1,57 @@
 #include <iostream>
 #include <assert.h>
-
+#include <cmath>
+ 
+float MAX_Temp = 200;
 int alertFailureCount = 0;
+float acceptedDiff = 0.001;
+
+float convertToCelcius(float farenheit)
+{
+    return (farenheit - 32) * 5 / 9;
+}
+
+void countFailureCases(int returnCode)
+{
+   if (returnCode != 200) 
+   {
+        alertFailureCount += 1;
+   }
+}
+
+void alertInCelcius(float farenheit, int(*funAlerter)(float)) {
+    float celcius = convertToCelcius(farenheit);
+    int returnCode = funAlerter(celcius);
+    countFailureCases(returnCode);
+}
 
 int networkAlertStub(float celcius) {
-    std::cout << "ALERT: Temperature is " << celcius << " celcius.\n";
-    // Return 200 for ok
-    // Return 500 for not-ok
-    // stub always succeeds and returns 200
+    if(celcius>MAX_Temp)
+    {
+        return 500;
+    }
     return 200;
 }
 
-void alertInCelcius(float farenheit) {
-    float celcius = (farenheit - 32) * 5 / 9;
-    int returnCode = networkAlertStub(celcius);
-    if (returnCode != 200) {
-        // non-ok response is not an error! Issues happen in life!
-        // let us keep a count of failures to report
-        // However, this code doesn't count failures!
-        // Add a test below to catch this bug. Alter the stub above, if needed.
-        alertFailureCount += 0;
-    }
+void testConversion(float f, float expectedValue)
+{
+    float receivedValue = convertToCelcius(f);
+    assert((receivedValue-expectedValue) < acceptedDiff);
 }
 
+void testAlerter(float testValue, int expectedCount)
+{
+    alertInCelcius(testValue, &networkAlertStub);
+    std::cout << "alertFailureCount "<< alertFailureCount << " alerts failed.\n";
+    assert(alertFailureCount == expectedCount);
+}
 int main() {
-    alertInCelcius(400.5);
-    alertInCelcius(303.6);
-    std::cout << alertFailureCount << " alerts failed.\n";
+    testAlerter(400.5, 1);
+    testAlerter(303.6, 1);
+    testAlerter(503.6, 2);
+    testConversion(400.5, 204.722);
+    testConversion(303.6, 150.899);
     std::cout << "All is well (maybe!)\n";
+
     return 0;
 }
